@@ -1,0 +1,25 @@
+<div th:fragment="content">
+    <h2>Waste Categories</h2>
+    <a th:href="@{/categories/new}" class="btn btn-primary mb-3">Add Category</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="category : ${categories}">
+            <td th:text="${category.category_id}"></td>
+            <td th:text="${category.name}"></td>
+            <td th:text="${category.description}"></td>
+            <td>
+                <a th:href="@{/categories/delete/{id}(id=${category.category_id})}"
+                   class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

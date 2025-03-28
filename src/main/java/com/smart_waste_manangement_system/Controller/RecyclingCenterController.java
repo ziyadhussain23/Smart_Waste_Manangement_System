@@ -1,0 +1,37 @@
+package com.smart_waste_manangement_system.Controller;
+
+import com.smart_waste_manangement_system.model.RecyclingCenter;
+import com.smart_waste_manangement_system.repository.RecyclingCenterRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@AllArgsConstructor
+@Controller
+@RequestMapping("/centers")
+public class RecyclingCenterController {
+
+    private RecyclingCenterRepository centerRepo;
+
+    @GetMapping
+    public String listCenters(Model model) {
+        model.addAttribute("centers", centerRepo.findAll());
+        return "center/list"; // List view [[6]]
+    }
+
+    @GetMapping("/new")
+    public String createCenterForm(Model model) {
+        model.addAttribute("center", new RecyclingCenter());
+        return "center/form"; // Form template [[5]]
+    }
+
+    @PostMapping("/save")
+    public String saveCenter(@ModelAttribute RecyclingCenter center) {
+        centerRepo.save(center);
+        return "redirect:/centers";
+    }
+}
