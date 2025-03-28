@@ -1,4 +1,4 @@
-package com.smart_waste_manangement_system;
+package com.smart_waste_management_system;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

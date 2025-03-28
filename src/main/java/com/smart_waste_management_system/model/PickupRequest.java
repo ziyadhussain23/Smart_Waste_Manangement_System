@@ -1,4 +1,4 @@
-package com.smart_waste_manangement_system.model;
+package com.smart_waste_management_system.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

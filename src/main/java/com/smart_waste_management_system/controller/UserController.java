@@ -1,8 +1,8 @@
-package com.smart_waste_manangement_system.Controller;
+package com.smart_waste_management_system.controller;
 
-import com.smart_waste_manangement_system.model.User;
-import com.smart_waste_manangement_system.repository.PickupRequestRepository;
-import com.smart_waste_manangement_system.repository.UserRepository;
+import com.smart_waste_management_system.model.User;
+import com.smart_waste_management_system.repository.PickupRequestRepository;
+import com.smart_waste_management_system.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

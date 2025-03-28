@@ -1,5 +1,5 @@
-package com.smart_waste_manangement_system.repository;
-import com.smart_waste_manangement_system.model.PickupRequest;
+package com.smart_waste_management_system.repository;
+import com.smart_waste_management_system.model.PickupRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

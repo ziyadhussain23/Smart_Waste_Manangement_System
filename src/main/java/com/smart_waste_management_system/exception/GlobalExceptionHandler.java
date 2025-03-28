@@ -1,4 +1,4 @@
-package com.smart_waste_manangement_system.exception;
+package com.smart_waste_management_system.exception;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
