@@ -16,6 +16,7 @@
             <th>Description</th>
             <th>Status</th>
             <th>User</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -24,10 +25,17 @@
             <td th:text="${complaint.description}"></td>
             <td th:text="${complaint.status}"></td>
             <td th:text="${complaint.user.username}"></td>
+            <td>
+                <a th:if="${complaint.status != 'Resolved'}"
+                   th:href="@{'/complaints/resolve/' + ${complaint.complaint_id}}"
+                   class="btn btn-info btn-sm">Resolve</a>
+                <button th:if="${complaint.status == 'Resolved'}"
+                        class="btn btn-info btn-sm" disabled>Resolved</button>
+            </td>
         </tr>
         </tbody>
     </table>
-  <a class="btn btn-outline-secondary mt-2" th:href="@{/dashboard}">Back to Dashboard</a>
+    <a class="btn btn-outline-secondary mt-2" th:href="@{/dashboard}">Back to Dashboard</a>
 </div>
 </body>
 </html>

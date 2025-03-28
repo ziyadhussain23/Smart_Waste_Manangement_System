@@ -9,6 +9,8 @@
 <div class="container mt-4">
     <h1>Create Recycling Center</h1>
     <form th:action="@{/centers/save}" th:object="${center}" method="post">
+        <!-- Hidden input added for category_id -->
+        <input type="hidden" th:field="*{center_id}" />
         <div class="form-group">
             <label for="location">Location</label>
             <input type="text" id="location" th:field="*{location}" class="form-control" placeholder="Enter location"/>

@@ -17,9 +17,6 @@ public interface RecyclingCenterRepository extends JpaRepository<RecyclingCenter
     @Query("SELECT r FROM RecyclingCenter r")
     List<RecyclingCenter> findAll();
 
-    @Query("SELECT r FROM RecyclingCenter r WHERE r.center_id = :id")
-    Optional<RecyclingCenter> findById(@Param("id") int id);
-
     @NonNull
     @Modifying
     @Transactional
@@ -33,4 +30,14 @@ public interface RecyclingCenterRepository extends JpaRepository<RecyclingCenter
     @Query(value = "UPDATE recycling_center SET location = :#{#center.location}, contact_info = :#{#center.contact_info} WHERE center_id = :#{#center.center_id}",
             nativeQuery = true)
     void update(@NonNull @Param("center") RecyclingCenter center);
+
+    @NonNull
+    @Query("SELECT r FROM RecyclingCenter r WHERE r.center_id = :id")
+    Optional<RecyclingCenter> findById(@Param("id") int id);
+
+    @NonNull
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM RecyclingCenter r WHERE r.center_id = :id")
+    void deleteById(@Param("id") int id);
 }

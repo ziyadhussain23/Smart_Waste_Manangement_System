@@ -5,10 +5,7 @@ import com.smart_waste_management_system.repository.RecyclingCenterRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @Controller
@@ -36,6 +33,22 @@ public class RecyclingCenterController {
         } else {
             centerRepo.update(center);
         }
+        return "redirect:/centers";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editCenterForm(@PathVariable int id, Model model) {
+        RecyclingCenter center = centerRepo.findById(id).orElse(null);
+        if (center != null) {
+            model.addAttribute("center", center);
+            return "center/form"; // Form template for update
+        }
+        return "redirect:/centers";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteCenter(@PathVariable int id) {
+        centerRepo.deleteById(id);
         return "redirect:/centers";
     }
 }

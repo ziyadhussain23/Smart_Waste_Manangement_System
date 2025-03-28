@@ -17,9 +17,6 @@ public interface WasteCategoryRepository extends JpaRepository<WasteCategory, In
     @Query("SELECT w FROM WasteCategory w")
     List<WasteCategory> findAll();
 
-    @Query("SELECT w FROM WasteCategory w WHERE w.category_id = :id")
-    Optional<WasteCategory> findById(@Param("id") int id);
-
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO waste_category (name, description) VALUES (:#{#category.name}, :#{#category.description})",
@@ -31,4 +28,12 @@ public interface WasteCategoryRepository extends JpaRepository<WasteCategory, In
     @Query(value = "UPDATE waste_category SET name = :#{#category.name}, description = :#{#category.description} WHERE category_id = :#{#category.category_id}",
             nativeQuery = true)
     void update(@Param("category") WasteCategory category);
+
+    @Query("SELECT w FROM WasteCategory w WHERE w.category_id = :id")
+    Optional<WasteCategory> findById(@Param("id") int id);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM WasteCategory w WHERE w.category_id = :id")
+    void deleteById(@Param("id") int id);
 }

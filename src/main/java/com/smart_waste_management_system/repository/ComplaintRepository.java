@@ -13,13 +13,6 @@ import java.util.Optional;
 @Repository
 public interface ComplaintRepository extends JpaRepository<Complaint, Integer> {
 
-    @Query("SELECT c FROM Complaint c WHERE c.user.user_id = :userId")
-    List<Complaint> findByUserId(@Param("userId") int userId);
-
-    @Query("SELECT c FROM Complaint c WHERE c.status = :status")
-    List<Complaint> findByStatus(@Param("status") String status);
-
-
     @NonNull
     @Query("SELECT c FROM Complaint c")
     List<Complaint> findAll();
@@ -40,4 +33,7 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Integer> {
     @Query(value = "UPDATE complaint SET description = :#{#complaint.description}, status = :#{#complaint.status}, user_id = :#{#complaint.user.user_id} WHERE complaint_id = :#{#complaint.complaint_id}",
             nativeQuery = true)
     void update(@NonNull @Param("complaint") Complaint complaint);
+
+    @Query("SELECT COUNT(c) FROM Complaint c WHERE c.status <> 'Resolved'")
+    long count();
 }

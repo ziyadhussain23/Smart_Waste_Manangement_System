@@ -12,16 +12,6 @@ import java.util.Optional;
 
 @Repository
 public interface PickupRequestRepository extends JpaRepository<PickupRequest, Integer> {
-
-    @Query("SELECT p FROM PickupRequest p WHERE p.user.user_id = :userId")
-    List<PickupRequest> findByUserId(@Param("userId") int userId);
-
-    @Query("SELECT p FROM PickupRequest p WHERE p.category.category_id = :categoryId")
-    List<PickupRequest> findByCategoryId(@Param("categoryId") int categoryId);
-
-    @Query("SELECT p FROM PickupRequest p WHERE p.status = :status")
-    List<PickupRequest> findByStatus(@Param("status") String status);
-
     @NonNull
     @Query("SELECT p FROM PickupRequest p")
     List<PickupRequest> findAll();
@@ -42,4 +32,7 @@ public interface PickupRequestRepository extends JpaRepository<PickupRequest, In
     @Query(value = "UPDATE pickup_request SET quantity = :#{#request.quantity}, status = :#{#request.status}, user_id = :#{#request.user.user_id}, category_id = :#{#request.category.category_id} WHERE request_id = :#{#request.request_id}",
             nativeQuery = true)
     void update(@NonNull @Param("request") PickupRequest request);
+
+    @Query("SELECT COUNT(p) FROM PickupRequest p WHERE p.status <> 'Collected'")
+    long count();
 }

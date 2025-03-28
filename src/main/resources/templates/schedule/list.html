@@ -1,3 +1,4 @@
+<!-- File: src/main/resources/templates/schedule/list.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -11,20 +12,28 @@
     <a class="btn btn-primary mb-3" th:href="@{/schedules/new}">Create New Schedule</a>
     <table class="table table-bordered">
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Area</th>
-                <th>Date</th>
-                <th>Status</th>
-            </tr>
+        <tr>
+            <th>ID</th>
+            <th>Area</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
-            <tr th:each="schedule : ${schedules}">
-                <td th:text="${schedule.schedule_id}"></td>
-                <td th:text="${schedule.area}"></td>
-                <td th:text="${schedule.date}"></td>
-                <td th:text="${schedule.status}"></td>
-            </tr>
+        <tr th:each="schedule : ${schedules}">
+            <td th:text="${schedule.schedule_id}"></td>
+            <td th:text="${schedule.area}"></td>
+            <td th:text="${schedule.date}"></td>
+            <td th:text="${schedule.status}"></td>
+            <td>
+                <a th:if="${schedule.status != 'Completed'}"
+                   th:href="@{'/schedules/complete/' + ${schedule.schedule_id}}"
+                   class="btn btn-info btn-sm">Complete</a>
+                <button th:if="${schedule.status == 'Completed'}"
+                        class="btn btn-info btn-sm" disabled>Completed</button>
+            </td>
+        </tr>
         </tbody>
     </table>
     <a class="btn btn-outline-secondary mt-3" th:href="@{/dashboard}">Back to Dashboard</a>

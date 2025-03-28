@@ -28,7 +28,12 @@
                 <td th:text="${request.category.name}"></td>
                 <td th:text="${request.status}"></td>
                 <td>
-                    <a class="btn btn-success btn-sm" th:href="@{'/requests/mark-collected/' + ${request.request_id}}">Mark Collected</a>
+                    <a th:if="${request.status != 'Collected'}"
+                       th:href="@{'/requests/mark-collected/' + ${request.request_id}}"
+                       class="btn btn-success btn-sm">Mark Collected</a>
+                    <button th:if="${request.status == 'Collected'}"
+                            class="btn btn-success btn-sm"
+                            disabled>Collected</button>
                 </td>
             </tr>
         </tbody>

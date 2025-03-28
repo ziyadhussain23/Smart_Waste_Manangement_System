@@ -8,21 +8,13 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+
 
 @Repository
 public interface CollectionScheduleRepository extends JpaRepository<CollectionSchedule, Integer> {
 
-    @Query("SELECT c FROM CollectionSchedule c WHERE c.area = :area")
-    List<CollectionSchedule> findByArea(@Param("area") String area);
 
-    @Query("SELECT c FROM CollectionSchedule c WHERE c.status = :status")
-    List<CollectionSchedule> findByStatus(@Param("status") String status);
-
-    @Query("SELECT c FROM CollectionSchedule c WHERE c.schedule_id = :id")
-    Optional<CollectionSchedule> findById(@Param("id") int id);
 
     @NonNull
     @Query("SELECT c FROM CollectionSchedule c")
@@ -42,9 +34,7 @@ public interface CollectionScheduleRepository extends JpaRepository<CollectionSc
             nativeQuery = true)
     void update(@NonNull @Param("schedule") CollectionSchedule schedule);
 
-    @Query("SELECT c FROM CollectionSchedule c WHERE c.date = :date")
-    List<CollectionSchedule> findByDate(@Param("date") LocalDate date);
+    @Query("SELECT COUNT(c) FROM CollectionSchedule c WHERE c.status <> 'Completed'")
+    long count();
 
-    @Query("SELECT c FROM CollectionSchedule c WHERE c.date >= :startDate AND c.date <= :endDate")
-    List<CollectionSchedule> findByDateRange(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

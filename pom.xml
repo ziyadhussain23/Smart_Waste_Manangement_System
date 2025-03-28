@@ -11,8 +11,8 @@
     <groupId>com</groupId>
     <artifactId>Smart_Waste_Manangement_System</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Smart Waste Manangement System</name>
-    <description>Smart Waste Manangement System</description>
+    <name>Smart Waste Management System</name>
+    <description>Smart Waste Management System</description>
     <url/>
     <licenses>
         <license/>
@@ -61,6 +61,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
         </dependency>
     </dependencies>
 

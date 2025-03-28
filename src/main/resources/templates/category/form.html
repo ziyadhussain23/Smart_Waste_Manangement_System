@@ -1,28 +1,31 @@
+<!-- File: src/main/resources/templates/category/form.html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="ISO-8859-1" />
-    <title>Create Waste Category</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
-  </head>
-  <body>
-    <div class="container mt-4">
-      <h1>Create Waste Category</h1>
-      <form th:action="@{/categories/save}" th:object="${category}" method="post">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Enter category name" />
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea id="description" th:field="*{description}" class="form-control" placeholder="Enter category description"></textarea>
-        </div>
-        <button type="submit" class="btn btn-success mt-2">Save</button>
-        <br/>
-        <a class="btn btn-outline-secondary mt-2" th:href="@{/categories}">Back to Categories</a>
-        <br/>
-        <a class="btn btn-outline-secondary mt-2" th:href="@{/dashboard}">Back to Dashboard</a>
-      </form>
+<head>
+  <meta charset="ISO-8859-1" />
+  <title>Create Waste Category</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container mt-4">
+  <h1>Create Waste Category</h1>
+  <form th:action="@{/categories/save}" th:object="${category}" method="post">
+    <!-- Hidden input added for category_id -->
+    <input type="hidden" th:field="*{category_id}" />
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Enter category name" />
     </div>
-  </body>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" th:field="*{description}" class="form-control" placeholder="Enter category description"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success mt-2">Save</button>
+    <br/>
+    <a class="btn btn-outline-secondary mt-2" th:href="@{/categories}">Back to Categories</a>
+    <br/>
+    <a class="btn btn-outline-secondary mt-2" th:href="@{/dashboard}">Back to Dashboard</a>
+  </form>
+</div>
+</body>
 </html>

@@ -5,10 +5,7 @@ import com.smart_waste_management_system.repository.CollectionScheduleRepository
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @Controller
@@ -36,6 +33,15 @@ public class CollectionScheduleController {
         } else {
             scheduleRepo.update(schedule);
         }
+        return "redirect:/schedules";
+    }
+
+    @GetMapping("/complete/{id}")
+    public String completeSchedule(@PathVariable int id) {
+        scheduleRepo.findById(id).ifPresent(schedule -> {
+            schedule.setStatus("Completed");
+            scheduleRepo.update(schedule);
+        });
         return "redirect:/schedules";
     }
 }
