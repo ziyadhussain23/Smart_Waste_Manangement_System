@@ -1,19 +1,24 @@
-<div th:fragment="content">
-  <h2 th:text="${category.category_id} ? 'Edit Category' : 'New Category'"></h2>
-  <form th:action="@{/categories/save}" th:object="${category}" method="post">
-    <input type="hidden" th:field="*{category_id}">
-    <div class="mb-3">
-      <label>Name</label>
-      <label>
-        <input type="text" th:field="*{name}" class="form-control" required>
-      </label>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Create Waste Category</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div class="container mt-4">
+      <h1>Create Waste Category</h1>
+      <form th:action="@{/categories/save}" th:object="${category}" method="post">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" th:field="*{name}" class="form-control" placeholder="Enter category name" />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" th:field="*{description}" class="form-control" placeholder="Enter category description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success mt-2">Save</button>
+      </form>
     </div>
-    <div class="mb-3">
-      <label>Description</label>
-      <label>
-        <textarea th:field="*{description}" class="form-control"></textarea>
-      </label>
-    </div>
-    <button type="submit" class="btn btn-success">Save</button>
-  </form>
-</div>
+  </body>
+</html>

@@ -1,13 +1,20 @@
-<div th:fragment="content">
-    <h2>Recycling Centers</h2>
-    <a th:href="@{/centers/new}" class="btn btn-primary mb-3">Add Center</a>
-    <table class="table">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Recycling Centers</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Recycling Centers</h1>
+    <a class="btn btn-primary mb-3" th:href="@{/centers/new}">Create New Center</a>
+    <table class="table table-bordered">
         <thead>
         <tr>
             <th>ID</th>
             <th>Location</th>
             <th>Contact Info</th>
-            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -15,11 +22,9 @@
             <td th:text="${center.center_id}"></td>
             <td th:text="${center.location}"></td>
             <td th:text="${center.contact_info}"></td>
-            <td>
-                <a th:href="@{/centers/delete/{id}(id=${center.center_id})}"
-                   class="btn btn-danger btn-sm">Delete</a>
-            </td>
         </tr>
         </tbody>
     </table>
 </div>
+</body>
+</html>

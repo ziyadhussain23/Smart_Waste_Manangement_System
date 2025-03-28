@@ -1,26 +1,32 @@
-<div th:fragment="content">
-  <h2>Complaints</h2>
-  <table class="table">
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>User</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="complaint : ${complaints}">
-      <td th:text="${complaint.complaint_id}"></td>
-      <td th:text="${complaint.user.username}"></td>
-      <td th:text="${complaint.description}"></td>
-      <td th:text="${complaint.status}"></td>
-      <td>
-        <a th:href="@{/complaints/resolve/{id}(id=${complaint.complaint_id})}"
-           class="btn btn-success btn-sm">Resolve</a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Complaints</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Complaints</h1>
+    <a class="btn btn-primary mb-3" th:href="@{/complaints/new}">Submit New Complaint</a>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>User</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="complaint : ${complaints}">
+            <td th:text="${complaint.complaint_id}"></td>
+            <td th:text="${complaint.description}"></td>
+            <td th:text="${complaint.status}"></td>
+            <td th:text="${complaint.user.username}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+</body>
+</html>
