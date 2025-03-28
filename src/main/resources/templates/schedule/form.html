@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Create Collection Schedule</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+  <meta charset="ISO-8859-1">
+  <title>Create Collection Schedule</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
 </head>
 <body>
 <div class="container mt-4">
-    <h1>Create Collection Schedule</h1>
-    <form th:action="@{/schedules/save}" th:object="${schedule}" method="post">
-        <div class="form-group">
-            <label for="area">Area</label>
-            <input type="text" id="area" th:field="*{area}" class="form-control" placeholder="Enter area"/>
-        </div>
-        <div class="form-group">
-            <label for="date">Date</label>
-            <input type="date" id="date" th:field="*{date}" class="form-control"/>
-        </div>
-        <div class="form-group">
-            <label for="status">Status</label>
-            <input type="text" id="status" th:field="*{status}" class="form-control" placeholder="Enter status"/>
-        </div>
-        <button type="submit" class="btn btn-success mt-2">Save</button>
-    </form>
+  <h1>Create Collection Schedule</h1>
+  <form th:action="@{/schedules/save}" th:object="${schedule}" method="post">
+    <div class="form-group">
+      <label for="area">Area</label>
+      <input type="text" id="area" th:field="*{area}" class="form-control" placeholder="Enter area"/>
+    </div>
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input type="date" id="date" th:field="*{date}" class="form-control"/>
+    </div>
+    <div class="form-group">
+      <label for="status">Status</label>
+      <input type="text" id="status" th:field="*{status}" class="form-control" placeholder="Enter status"/>
+    </div>
+    <button type="submit" class="btn btn-success mt-2">Save</button>
+    <br/>
+    <a class="btn btn-outline-secondary mt-2" th:href="@{/categories}">Back to Schedule</a>
+    <br/>
+    <a class="btn btn-outline-secondary mt-2" th:href="@{/dashboard}">Back to Dashboard</a>
+  </form>
 </div>
 </body>
 </html>

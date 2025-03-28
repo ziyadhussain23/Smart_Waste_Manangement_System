@@ -18,6 +18,10 @@
           <textarea id="description" th:field="*{description}" class="form-control" placeholder="Enter category description"></textarea>
         </div>
         <button type="submit" class="btn btn-success mt-2">Save</button>
+        <br/>
+        <a class="btn btn-outline-secondary mt-2" th:href="@{/categories}">Back to Categories</a>
+        <br/>
+        <a class="btn btn-outline-secondary mt-2" th:href="@{/dashboard}">Back to Dashboard</a>
       </form>
     </div>
   </body>
