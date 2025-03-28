@@ -37,7 +37,11 @@ public class PickupRequestController {
     @PostMapping("/save")
     public String saveRequest(@ModelAttribute PickupRequest request) {
         request.setStatus("Requested");
-        requestRepo.save(request);
+        if (request.getRequest_id() == 0) {
+            requestRepo.insert(request);
+        } else {
+            requestRepo.update(request);
+        }
         return "redirect:/requests";
     }
 
@@ -46,7 +50,7 @@ public class PickupRequestController {
         PickupRequest request = requestRepo.findById(id).orElse(null);
         if (request != null) {
             request.setStatus("Collected");
-            requestRepo.save(request);
+            requestRepo.update(request);
         }
         return "redirect:/requests";
     }

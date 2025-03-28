@@ -31,7 +31,11 @@ public class RecyclingCenterController {
 
     @PostMapping("/save")
     public String saveCenter(@ModelAttribute RecyclingCenter center) {
-        centerRepo.save(center);
+        if (center.getCenter_id() == 0) {
+            centerRepo.insert(center);
+        } else {
+            centerRepo.update(center);
+        }
         return "redirect:/centers";
     }
 }

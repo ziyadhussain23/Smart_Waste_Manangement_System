@@ -28,8 +28,12 @@ public class WasteCategoryController {
 
     @PostMapping("/save")
     public String saveCategory(@ModelAttribute WasteCategory category) {
-        categoryRepo.save(category);
-        return "redirect:/categories"; // Post-redirect-get pattern [[3]]
+        if (category.getCategory_id() == 0) {
+            categoryRepo.insert(category);
+        } else {
+            categoryRepo.update(category);
+        }
+        return "redirect:/categories";
     }
 
     @GetMapping("/delete/{id}")

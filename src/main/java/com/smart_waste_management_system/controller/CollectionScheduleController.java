@@ -31,7 +31,11 @@ public class CollectionScheduleController {
 
     @PostMapping("/save")
     public String saveSchedule(@ModelAttribute CollectionSchedule schedule) {
-        scheduleRepo.save(schedule);
+        if (schedule.getSchedule_id() == 0) {
+            scheduleRepo.insert(schedule);
+        } else {
+            scheduleRepo.update(schedule);
+        }
         return "redirect:/schedules";
     }
 }

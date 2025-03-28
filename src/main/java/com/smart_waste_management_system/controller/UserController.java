@@ -30,7 +30,7 @@ public class UserController {
                 .filter(u -> u.getPassword().equals(password))
                 .orElse(null);
         if (user != null) {
-            return "redirect:/dashboard"; // Redirect based on role [[9]]
+            return "redirect:/dashboard";
         }
         model.addAttribute("error", "Invalid credentials");
         return "login";

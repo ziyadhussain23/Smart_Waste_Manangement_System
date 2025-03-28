@@ -33,7 +33,11 @@ public class ComplaintController {
     @PostMapping("/save")
     public String saveComplaint(@ModelAttribute Complaint complaint) {
         complaint.setStatus("Pending");
-        complaintRepo.save(complaint);
+        if (complaint.getComplaint_id() == 0) {
+            complaintRepo.insert(complaint);
+        } else {
+            complaintRepo.update(complaint);
+        }
         return "redirect:/complaints";
     }
 
@@ -42,7 +46,7 @@ public class ComplaintController {
         Complaint complaint = complaintRepo.findById(id).orElse(null);
         if (complaint != null) {
             complaint.setStatus("Resolved");
-            complaintRepo.save(complaint);
+            complaintRepo.update(complaint);
         }
         return "redirect:/complaints";
     }
