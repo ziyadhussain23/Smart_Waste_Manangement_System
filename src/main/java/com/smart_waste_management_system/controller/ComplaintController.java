@@ -33,7 +33,7 @@ public class ComplaintController {
     @PostMapping("/save")
     public String saveComplaint(@ModelAttribute Complaint complaint) {
         complaint.setStatus("Pending");
-        if (complaint.getComplaint_id() == 0) {
+        if (complaint.getComplaint_id() ==  null) {
             complaintRepo.insert(complaint);
         } else {
             complaintRepo.update(complaint);

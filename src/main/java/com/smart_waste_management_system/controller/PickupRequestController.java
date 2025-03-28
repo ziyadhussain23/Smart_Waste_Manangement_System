@@ -37,7 +37,7 @@ public class PickupRequestController {
     @PostMapping("/save")
     public String saveRequest(@ModelAttribute PickupRequest request) {
         request.setStatus("Requested");
-        if (request.getRequest_id() == 0) {
+        if (request.getRequest_id() == null) {
             requestRepo.insert(request);
         } else {
             requestRepo.update(request);

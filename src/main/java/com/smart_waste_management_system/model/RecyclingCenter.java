@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class RecyclingCenter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int center_id;
+    private Integer center_id;
     private String location;
     private String contact_info;
 

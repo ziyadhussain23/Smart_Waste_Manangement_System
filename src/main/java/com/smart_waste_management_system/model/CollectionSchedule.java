@@ -17,7 +17,7 @@ import java.time.LocalDate;
 public class CollectionSchedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int schedule_id;
+    private Integer schedule_id;
     private String area;
     private LocalDate date;
     private String status;

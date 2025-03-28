@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class PickupRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int request_id;
+    private Integer request_id;
     private double quantity;
     private String status;
 

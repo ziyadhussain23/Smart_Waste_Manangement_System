@@ -28,7 +28,7 @@ public class WasteCategoryController {
 
     @PostMapping("/save")
     public String saveCategory(@ModelAttribute WasteCategory category) {
-        if (category.getCategory_id() == 0) {
+        if (category.getCategory_id() == null) {
             categoryRepo.insert(category);
         } else {
             categoryRepo.update(category);

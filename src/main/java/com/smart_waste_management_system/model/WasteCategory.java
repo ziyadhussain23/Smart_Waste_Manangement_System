@@ -16,7 +16,7 @@ import java.util.List;
 public class WasteCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int category_id;
+    private Integer category_id;
     private String name;
     private String description;
 

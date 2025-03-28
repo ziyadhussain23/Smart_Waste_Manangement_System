@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Complaint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int complaint_id;
+    private Integer complaint_id;
     private String description;
     private String status; // Pending, Resolved
 
