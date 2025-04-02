@@ -2,9 +2,11 @@ package com.smart_waste_management_system.controller;
 
 import com.smart_waste_management_system.model.RecyclingCenter;
 import com.smart_waste_management_system.repository.RecyclingCenterRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
@@ -17,17 +19,20 @@ public class RecyclingCenterController {
     @GetMapping
     public String listCenters(Model model) {
         model.addAttribute("centers", centerRepo.findAll());
-        return "center/list"; // List view [[6]]
+        return "center/list";
     }
 
     @GetMapping("/new")
     public String createCenterForm(Model model) {
         model.addAttribute("center", new RecyclingCenter());
-        return "center/form"; // Form template [[5]]
+        return "center/form";
     }
 
     @PostMapping("/save")
-    public String saveCenter(@ModelAttribute RecyclingCenter center) {
+    public String saveCenter(@Valid @ModelAttribute("center") RecyclingCenter center, BindingResult result) {
+        if(result.hasErrors()){
+            return "center/form";
+        }
         if (center.getCenter_id() == null) {
             centerRepo.insert(center);
         } else {
@@ -38,12 +43,8 @@ public class RecyclingCenterController {
 
     @GetMapping("/edit/{id}")
     public String editCenterForm(@PathVariable int id, Model model) {
-        RecyclingCenter center = centerRepo.findById(id).orElse(null);
-        if (center != null) {
-            model.addAttribute("center", center);
-            return "center/form"; // Form template for update
-        }
-        return "redirect:/centers";
+        centerRepo.findById(id).ifPresent(center -> model.addAttribute("center", center));
+        return "center/form";
     }
 
     @GetMapping("/delete/{id}")

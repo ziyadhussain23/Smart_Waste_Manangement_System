@@ -14,8 +14,6 @@ import java.util.List;
 @Repository
 public interface CollectionScheduleRepository extends JpaRepository<CollectionSchedule, Integer> {
 
-
-
     @NonNull
     @Query("SELECT c FROM CollectionSchedule c")
     List<CollectionSchedule> findAll();

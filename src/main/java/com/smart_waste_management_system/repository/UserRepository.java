@@ -20,7 +20,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("SELECT u FROM User u")
     List<User> findAll();
 
-
     @NonNull
     @Modifying
     @Transactional

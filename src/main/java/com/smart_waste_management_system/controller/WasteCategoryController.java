@@ -1,11 +1,12 @@
-// File: src/main/java/com/smart_waste_management_system/controller/WasteCategoryController.java
 package com.smart_waste_management_system.controller;
 
 import com.smart_waste_management_system.model.WasteCategory;
 import com.smart_waste_management_system.repository.WasteCategoryRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -30,7 +31,10 @@ public class WasteCategoryController {
     }
 
     @PostMapping("/save")
-    public String saveCategory(@ModelAttribute WasteCategory category) {
+    public String saveCategory(@Valid @ModelAttribute("category") WasteCategory category, BindingResult result) {
+        if (result.hasErrors()) {
+            return "category/form";
+        }
         if (category.getCategory_id() == null) {
             categoryRepo.insert(category);
         } else {
@@ -42,7 +46,7 @@ public class WasteCategoryController {
     @GetMapping("/edit/{id}")
     public String editCategoryForm(@PathVariable int id, Model model) {
         Optional<WasteCategory> categoryOpt = categoryRepo.findById(id);
-        if(categoryOpt.isPresent()){
+        if (categoryOpt.isPresent()) {
             model.addAttribute("category", categoryOpt.get());
             return "category/form";
         }

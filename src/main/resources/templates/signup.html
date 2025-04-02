@@ -8,14 +8,17 @@
 <body>
 <div class="container mt-4">
   <h1>Sign Up</h1>
+  <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
   <form th:action="@{/signup}" th:object="${user}" method="post">
     <div class="form-group">
       <label for="username">Username</label>
       <input type="text" id="username" th:field="*{username}" class="form-control" placeholder="Enter username" />
+      <div class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
       <input type="password" id="password" th:field="*{password}" class="form-control" placeholder="Enter password" />
+      <div class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
     </div>
     <div class="form-group">
       <label for="role">Role</label>
@@ -24,6 +27,7 @@
         <option value="CITIZEN">Citizen</option>
         <option value="EMPLOYEE">Employee</option>
       </select>
+      <div class="text-danger" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></div>
     </div>
     <button type="submit" class="btn btn-primary mt-2">Sign Up</button>
   </form>

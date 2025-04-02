@@ -1,4 +1,3 @@
-// File: src/main/java/com/smart_waste_management_system/controller/UserController.java
 package com.smart_waste_management_system.controller;
 
 import com.smart_waste_management_system.model.User;
@@ -6,14 +5,16 @@ import com.smart_waste_management_system.repository.PickupRequestRepository;
 import com.smart_waste_management_system.repository.UserRepository;
 import com.smart_waste_management_system.repository.ComplaintRepository;
 import com.smart_waste_management_system.repository.CollectionScheduleRepository;
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.servlet.http.HttpServletRequest;
 
 @AllArgsConstructor
 @Controller
@@ -26,7 +27,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String loginForm() {
-        return "login"; // Thymeleaf template: login.html
+        return "login";
     }
 
     @PostMapping("/authenticate")
@@ -48,7 +49,7 @@ public class UserController {
         model.addAttribute("totalRequests", pickupRequestRepo.count());
         model.addAttribute("totalComplaints", complaintRepo.count());
         model.addAttribute("totalSchedules", scheduleRepo.count());
-        return "dashboard"; // Thymeleaf template: dashboard.html
+        return "dashboard";
     }
 
     @GetMapping("/logout")
@@ -60,11 +61,18 @@ public class UserController {
     @GetMapping("/signup")
     public String signupForm(Model model) {
         model.addAttribute("user", new User());
-        return "signup"; // Thymeleaf template: signup.html
+        return "signup";
     }
 
     @PostMapping("/signup")
-    public String signupUser(@ModelAttribute User user) {
+    public String signupUser(@Valid @ModelAttribute User user, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return "signup";
+        }
+        if (userRepo.findByUsername(user.getUsername()).isPresent()) {
+            model.addAttribute("error", "username already taken");
+            return "signup";
+        }
         userRepo.insert(user);
         return "redirect:/login";
     }
