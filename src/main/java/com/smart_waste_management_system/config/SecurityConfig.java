@@ -21,11 +21,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/login", "/signup").permitAll()
+                        .requestMatchers("/login", "/signup", "/authenticate").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .loginProcessingUrl("/authenticate")
                         .defaultSuccessUrl("/dashboard", true)
+                        .failureUrl("/login?error=true")
                         .permitAll())
                 .logout(LogoutConfigurer::permitAll);
         return http.build();
