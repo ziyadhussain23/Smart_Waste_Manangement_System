@@ -20,14 +20,12 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Integer> {
     @Query("SELECT c FROM Complaint c WHERE c.complaint_id = :id")
     Optional<Complaint> findById(@Param("id") int id);
 
-    @NonNull
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO complaint (description, status, user_id) VALUES (:#{#complaint.description}, :#{#complaint.status}, :#{#complaint.user.user_id})",
             nativeQuery = true)
     void insert(@NonNull @Param("complaint") Complaint complaint);
 
-    @NonNull
     @Modifying
     @Transactional
     @Query(value = "UPDATE complaint SET description = :#{#complaint.description}, status = :#{#complaint.status}, user_id = :#{#complaint.user.user_id} WHERE complaint_id = :#{#complaint.complaint_id}",

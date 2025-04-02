@@ -20,14 +20,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("SELECT u FROM User u")
     List<User> findAll();
 
-    @NonNull
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO user (username, password, role) VALUES (:#{#user.username}, :#{#user.password}, :#{#user.role})",
             nativeQuery = true)
     void insert(@NonNull @Param("user") User user);
 
-    @NonNull
     @Modifying
     @Transactional
     @Query(value = "UPDATE user SET username = :#{#user.username}, password = :#{#user.password}, role = :#{#user.role} WHERE user_id = :#{#user.user_id}",

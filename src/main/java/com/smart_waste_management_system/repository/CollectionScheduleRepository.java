@@ -18,14 +18,12 @@ public interface CollectionScheduleRepository extends JpaRepository<CollectionSc
     @Query("SELECT c FROM CollectionSchedule c")
     List<CollectionSchedule> findAll();
 
-    @NonNull
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO collection_schedule (area, date, status) VALUES (:#{#schedule.area}, :#{#schedule.date}, :#{#schedule.status})",
             nativeQuery = true)
     void insert(@NonNull @Param("schedule") CollectionSchedule schedule);
 
-    @NonNull
     @Modifying
     @Transactional
     @Query(value = "UPDATE collection_schedule SET area = :#{#schedule.area}, date = :#{#schedule.date}, status = :#{#schedule.status} WHERE schedule_id = :#{#schedule.schedule_id}",

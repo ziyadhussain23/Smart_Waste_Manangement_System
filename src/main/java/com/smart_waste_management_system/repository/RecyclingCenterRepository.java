@@ -17,14 +17,12 @@ public interface RecyclingCenterRepository extends JpaRepository<RecyclingCenter
     @Query("SELECT r FROM RecyclingCenter r")
     List<RecyclingCenter> findAll();
 
-    @NonNull
     @Modifying
     @Transactional
     @Query(value = "INSERT INTO recycling_center (location, contact_info) VALUES (:#{#center.location}, :#{#center.contact_info})",
             nativeQuery = true)
     void insert(@NonNull @Param("center") RecyclingCenter center);
 
-    @NonNull
     @Modifying
     @Transactional
     @Query(value = "UPDATE recycling_center SET location = :#{#center.location}, contact_info = :#{#center.contact_info} WHERE center_id = :#{#center.center_id}",
@@ -35,7 +33,6 @@ public interface RecyclingCenterRepository extends JpaRepository<RecyclingCenter
     @Query("SELECT r FROM RecyclingCenter r WHERE r.center_id = :id")
     Optional<RecyclingCenter> findById(@Param("id") int id);
 
-    @NonNull
     @Modifying
     @Transactional
     @Query("DELETE FROM RecyclingCenter r WHERE r.center_id = :id")
