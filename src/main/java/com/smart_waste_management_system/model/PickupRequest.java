@@ -2,7 +2,6 @@ package com.smart_waste_management_system.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,9 +19,8 @@ public class PickupRequest {
 
     @NotNull(message = "Quantity is required")
     @DecimalMin(value = "0.1", message = "Quantity must be greater than 0")
-    private double quantity;
+    private Double quantity;
 
-    @NotEmpty(message = "Status cannot be empty")
     private String status;
 
     @ManyToOne
