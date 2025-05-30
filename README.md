@@ -189,10 +189,6 @@ mvn test
 - Results may be incomplete due to search limitations
 - For complete code exploration, visit: [GitHub Code Search](https://github.com/ziyadhussain23/Smart_Waste_Manangement_System/search?type=code)
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 👨‍💻 Author
 
 **Ziyad Hussain**
